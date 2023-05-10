@@ -1,0 +1,18 @@
+$primary: #4444ce;;
+$secondary: #aaaaaa;
+$info: #79aea3;
+$success: #70ee9c;
+$warning: #b5f44a;
+$danger: #ef3131;
+
+.input-group {
+    input:focus {
+        box-shadow: none !important;
+    }
+
+    input:focus-with + .input-group-text {
+        border: 2px solid red !important;
+    }
+}
+
+@import "bootstrap";
