@@ -148,19 +148,31 @@ input:-webkit-autofill:active{
 
 @media screen and (height < 805px) and (width < 995px) {
   .login .col img {
-    max-height: 20em !important;
+    max-height: 20em;
   }
 }
 
 @media screen and (height < 682px) and (width < 995px) {
   .login .col img {
-    max-height: 15em !important;
+    max-height: 15em;
   }
 }
 
 @media screen and (height < 580px) and (width < 995px) {
   .login .col img {
     display: none;
+  }
+}
+
+@media screen and (width < 475px) {
+  .login .col img {
+    max-height: 20em;
+  }
+}
+
+@media screen and (width < 390px) {
+  .login .col img {
+    max-height: 15em;
   }
 }
 
