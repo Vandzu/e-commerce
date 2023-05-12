@@ -11,11 +11,11 @@ import logo from "../assets/imgs/logo.png";
 
 export default function Login() {
   return (
-    <Row className="justify-content-center login align-items-center w-100 h-100">
+    <Row className="justify-content-center login align-items-center w-100 h-100 m-auto">
       <Col className="left-person">
         <img src={person2} />
       </Col>
-      <Col className="login-form">
+      <Col xl={4} lg={4} md={12} className="login-form">
         <Row className="mb-2 login-logo">
           <img src={logo} />
           <h3>
@@ -23,25 +23,25 @@ export default function Login() {
             Store
             </h3>
         </Row>
-        <Row className="justify-content-center">
-          <Card className="w-75">
+        <Row className="justify-content-center card-login">
+          <Card>
             <Card.Header className="bg-white">Faça login</Card.Header>
             <Card.Body>
               <Form className="mb-2">
                 <Form.Group className="mb-2">
-                  <InputGroup>
+                  <InputGroup className="flex-row-reverse">
+                    <Form.Control type="email" placeholder="E-mail" />
                     <InputGroup.Text>
                       <FontAwesomeIcon icon={faMailBulk} />
                     </InputGroup.Text>
-                    <Form.Control type="email" placeholder="E-mail" />
                   </InputGroup>
                 </Form.Group>
                 <Form.Group className="mb-2">
-                  <InputGroup>
+                  <InputGroup className="flex-row-reverse">
+                    <Form.Control type="password" placeholder="Senha" />
                     <InputGroup.Text>
                       <FontAwesomeIcon icon={faKey} />
                     </InputGroup.Text>
-                    <Form.Control type="password" placeholder="Senha" />
                   </InputGroup>
                 </Form.Group>
                 <Button className="w-100">

@@ -1,4 +1,4 @@
-$primary: #4444ce;;
+$primary: #4444ce;
 $secondary: #aaaaaa;
 $info: #79aea3;
 $success: #70ee9c;
@@ -8,10 +8,13 @@ $danger: #ef3131;
 .input-group {
     input:focus {
         box-shadow: none !important;
-    }
+        border: 1px solid $primary !important;
+        border-left: none !important;
 
-    input:focus-with + .input-group-text {
-        border: 2px solid red !important;
+        +.input-group-text {
+            border: 1px solid $primary;
+            border-right: none !important;
+        }
     }
 }
 
