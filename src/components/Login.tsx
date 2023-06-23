@@ -23,6 +23,7 @@ export default function Login() {
   const [address, setAddress] = useState<string>('');
   const [showToast, setShowToast] = useState<boolean>(false);
   const [textToast, setTextToast] = useState<string>('');
+  const [toastDanger, setToastDanger] = useState<boolean>(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -62,6 +63,14 @@ export default function Login() {
           administrador: 0,
         }, {
           withCredentials: true
+        }).then(() => {
+          setTextToast('Usuário cadastrado com sucesso');
+          setToastDanger(false);
+          setShowToast(true);
+        }).catch(err => {
+          setTextToast('Erro ao cadastrar usuário');
+          setToastDanger(true);
+          setShowToast(true);
         })
       } else {
         setTextToast('As senhas não correspondem');
@@ -202,7 +211,7 @@ export default function Login() {
           onClose={() => setShowToast(false)}
           delay={5000}
           autohide
-          className='bg-danger text-white'
+          className={`bg-${toastDanger ? 'danger text-white' : 'success'}`}
         >
           <ToastBody>
             {textToast}

@@ -27,7 +27,7 @@ function App() {
     {
       path: '/products',
       element: (
-        <AuthRoute>
+        <AuthRoute route='products'>
           <Products />
         </AuthRoute>
       )

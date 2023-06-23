@@ -1,6 +1,6 @@
 import { Container, Nav, Navbar, Form, InputGroup, Button, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faCartShopping, faArrowAltCircleRight, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faCartShopping, faArrowAltCircleRight, faLayerGroup, faUser } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/imgs/logo.png'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -43,6 +43,7 @@ export default function NavUp() {
           {user.admin && (
             <Button
               className='w-auto me-2'
+              variant="outline-primary"
               onClick={() => navigate('/products')}
             >
               <FontAwesomeIcon icon={faLayerGroup} />
@@ -50,6 +51,13 @@ export default function NavUp() {
           )}
           <Button className='w-auto me-2'>
             <FontAwesomeIcon icon={faCartShopping} />
+          </Button>
+          <Button
+            variant="outline-success"
+            className='bg-white w-auto me-1'
+            onClick={() => navigate('/user')}
+          >
+            <FontAwesomeIcon icon={faUser} />
           </Button>
           <Button
             onClick={logout}
