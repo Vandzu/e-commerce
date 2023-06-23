@@ -40,7 +40,7 @@ export default function Login() {
         console.log('resdata user: ', res.data);
         dispatch(changeId(res.data.id));
         dispatch(changeAdmin(res.data.admin));
-        navigate("/user");
+        navigate("/store");
       })
       .catch(err => {
         console.error(err);

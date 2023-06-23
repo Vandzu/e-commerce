@@ -144,6 +144,19 @@ input:-webkit-autofill:active{
   animation: rightToLeft 0.7s
 }
 
+.img-product {
+  height: 206px;
+}
+
+.img-product img {
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.list-products {
+  margin: 97px 10px !important;
+}
+
 @media screen and (width < 995px) {
   .login .login-form {
     order: -1;

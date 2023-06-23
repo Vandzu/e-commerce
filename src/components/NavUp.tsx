@@ -1,4 +1,4 @@
-import { Container, Nav, Navbar, Form, InputGroup, Button, Col, Row } from 'react-bootstrap';
+import { Container, Nav, Navbar, Form, InputGroup, Button, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faCartShopping, faArrowAltCircleRight, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/imgs/logo.png'
@@ -23,7 +23,7 @@ export default function NavUp() {
   return (
     <Navbar bg="light" expand="lg" className="position-fixed w-100">
       <Container className='d-flex justify-content-between nav-items'>
-        <Navbar.Brand className="logo" href="#home">
+        <Navbar.Brand className="logo" href="/store">
           <img src={logo} />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
