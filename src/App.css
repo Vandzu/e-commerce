@@ -128,8 +128,12 @@ input:-webkit-autofill:active{
   align-items: center;
 }
 
-.login .login-form .login-logo, .login .login-form .card-login {
+.login .login-form .login-logo, .card-default {
   width: 342px;
+}
+
+.card-products {
+  width: 90%;
 }
 
 .login .left-person {

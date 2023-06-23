@@ -10,7 +10,7 @@ import {
 import person1 from "../assets/imgs/person1.png";
 import person2 from "../assets/imgs/person2.png";
 import logo from "../assets/imgs/logo.png";
-import { changeId } from '../redux/reducers/userSlice';
+import { changeId, changeAdmin } from '../redux/reducers/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux/es/exports';
 
@@ -37,7 +37,9 @@ export default function Login() {
       }
       )
       .then(res => {
+        console.log('resdata user: ', res.data);
         dispatch(changeId(res.data.id));
+        dispatch(changeAdmin(res.data.admin));
         navigate("/user");
       })
       .catch(err => {
@@ -81,7 +83,7 @@ export default function Login() {
             Store
           </h3>
         </Row>
-        <Row className="justify-content-center card-login">
+        <Row className="justify-content-center card-default">
           <Card>
             <Card.Header className="bg-white">{formType ? 'Registre sua conta' : 'Faça login'}</Card.Header>
             <Card.Body>

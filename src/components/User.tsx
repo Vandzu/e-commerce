@@ -62,7 +62,7 @@ export default function User() {
         <>
             <NavUp />
             <Row className="justify-content-center align-items-center w-100 h-100">
-                <Card className="card-login w-25 h-auto">
+                <Card className="card-default w-25 h-auto">
                     <Card.Header className="bg-white">Alterar dados</Card.Header>
                     <Form onSubmit={update}>
                         <Card.Body>

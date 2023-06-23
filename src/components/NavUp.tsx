@@ -1,19 +1,21 @@
 import { Container, Nav, Navbar, Form, InputGroup, Button, Col, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faCartShopping, faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faCartShopping, faArrowAltCircleRight, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/imgs/logo.png'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 export default function NavUp() {
   const navigate = useNavigate();
+  const user = useSelector(state => state.user);
 
   const logout = () => {
     axios.delete('http://localhost:8000/api.php?route=login', {
       withCredentials: true,
     })
     .then(() => {
-      navigate('/')
+      navigate('/');
     })
     .catch(err => console.log(err));
   }
@@ -38,6 +40,14 @@ export default function NavUp() {
           </Form.Group>
         </Nav>
         <Row className='justify-content-end'>
+          {user.admin && (
+            <Button
+              className='w-auto me-2'
+              onClick={() => navigate('/products')}
+            >
+              <FontAwesomeIcon icon={faLayerGroup} />
+            </Button>
+          )}
           <Button className='w-auto me-2'>
             <FontAwesomeIcon icon={faCartShopping} />
           </Button>
