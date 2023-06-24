@@ -14,10 +14,10 @@ export default function NavUp() {
     axios.delete('http://localhost:8000/api.php?route=login', {
       withCredentials: true,
     })
-    .then(() => {
-      navigate('/');
-    })
-    .catch(err => console.log(err));
+      .then(() => {
+        navigate('/');
+      })
+      .catch(err => console.log(err));
   }
 
   return (
@@ -41,22 +41,28 @@ export default function NavUp() {
         </Nav>
         <Row className='justify-content-end'>
           {user.admin && (
-            <><Button
-              className='w-auto me-2'
-              title='Gerenciar produtos'
-              variant="outline-primary"
-              onClick={() => navigate('/products')}
-            >
-              <FontAwesomeIcon icon={faLayerGroup} />
-            </Button><Button
-              className='w-auto me-2'
-              title='Gerenciar Categorias'
-              onClick={() => navigate('/categories')}
-            >
+            <>
+              <Button
+                className='w-auto me-2'
+                title='Gerenciar produtos'
+                variant="outline-primary"
+                onClick={() => navigate('/products')}
+              >
+                <FontAwesomeIcon icon={faLayerGroup} />
+              </Button><Button
+                className='w-auto me-2'
+                title='Gerenciar Categorias'
+                variant="info text-white"
+                onClick={() => navigate('/categories')}
+              >
                 <FontAwesomeIcon icon={faListUl} />
               </Button></>
           )}
-          <Button className='w-auto me-2'>
+          <Button
+            className='w-auto me-2'
+            title="Loja"
+            onClick={() => navigate('/store')}
+          >
             <FontAwesomeIcon icon={faCartShopping} />
           </Button>
           <Button

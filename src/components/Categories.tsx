@@ -144,7 +144,7 @@ export default function Categories() {
                 </Col>
               </Row>
               <Row className="justify-content-end">
-                <Button type="submit">
+                <Button className="w-auto me-3" type="submit">
                   <FontAwesomeIcon icon={faFloppyDisk} className="me-2" />
                   {editingCategory ? "Atualizar" : "Salvar"}
                 </Button>
@@ -152,7 +152,7 @@ export default function Categories() {
                   <Button
                     variant="secondary"
                     onClick={handleCancelEdit}
-                    className="ms-2"
+                    className="me-3 w-auto"
                   >
                     Cancelar
                   </Button>

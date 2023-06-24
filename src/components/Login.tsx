@@ -38,10 +38,9 @@ export default function Login() {
       }
       )
       .then(res => {
-        console.log('resdata user: ', res.data);
         dispatch(changeId(res.data.id));
         dispatch(changeAdmin(res.data.admin));
-        navigate("/store");
+        navigate(res.data.admin ? "/products" : "/store");
       })
       .catch(err => {
         console.error(err);
@@ -71,6 +70,7 @@ export default function Login() {
           setTextToast('Erro ao cadastrar usuário');
           setToastDanger(true);
           setShowToast(true);
+          console.log(err);
         })
       } else {
         setTextToast('As senhas não correspondem');

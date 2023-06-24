@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { faFloppyDisk, faFolderPlus, faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faFileText, faFloppyDisk, faFolderPlus, faList, faMoneyBill, faPencil, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Card, Button, Row, Form, Col, ToastContainer, Toast, ToastBody, Modal } from "react-bootstrap";
+import { Card, Button, Row, Form, Col, ToastContainer, Toast, ToastBody, Modal, Alert } from "react-bootstrap";
 import NavUp from "./NavUp";
 import axios from "axios";
 
@@ -13,6 +13,7 @@ export default function Products() {
     const [showModalDelete, setShowModalDelete] = useState<boolean>(false);
     const [products, setProducts] = useState<{ foto: string, descricao: string, preco: number, quantidade: number, id: number }[]>([]);
     const [product, setProduct] = useState<Object>({});
+    const [categories, setCategories] = useState<Array<Object>>([{}]);
 
     const getProducts = async () => {
         const products = await axios.get(`http://localhost:8000/api.php?route=produtos`);
@@ -28,6 +29,22 @@ export default function Products() {
 
         setProducts(products.data);
     }
+
+    const fetchCategories = async () => {
+        try {
+          const response = await axios.get(
+            "http://localhost:8000/api.php?route=categorias",
+            { withCredentials: true }
+          );
+          setCategories(response.data);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+    
+      useEffect(() => {
+        fetchCategories();
+      }, []);
 
     const submitForm = async (form: React.FormEvent<HTMLFormElement>) => {
         form.preventDefault();
@@ -95,14 +112,23 @@ export default function Products() {
                         <img src={item.foto}></img>
                     </Card.Header>
                     <Card.Body>
-                        <Row>
-                            {item.descricao}
+                        <Row className="align-items-center m-auto">
+                            <Alert className="p-1 w-auto">
+                                <FontAwesomeIcon icon={faFileText} className="me-2 w-auto" />
+                                {item.descricao}
+                            </Alert>
                         </Row>
-                        <Row>
-                            R$ {item.preco}
+                        <Row className="align-items-center m-auto">
+                            <Alert variant="success" className="w-auto p-1">
+                                <FontAwesomeIcon icon={faMoneyBill} className="me-2 w-auto" />
+                                R$ {item.preco}
+                            </Alert>
                         </Row>
-                        <Row>
-                            Quantidade: {item.quantidade}
+                        <Row className="align-items-center m-auto">
+                            <Alert variant="warning" className="w-auto p-1">
+                                <FontAwesomeIcon icon={faList} className="me-2 w-auto" />
+                                Quantidade: {item.quantidade}
+                            </Alert>
                         </Row>
                     </Card.Body>
                     <Card.Footer className="d-flex justify-content-end">
@@ -146,11 +172,12 @@ export default function Products() {
     return (
         <>
             <NavUp />
-            <Row className="justify-content-end w-100" style={{ marginTop: '100px' }}>
+            <Row className="justify-content-end w-100" style={{ marginTop: '90px' }}>
                 <Button
                     className="w-auto me-2"
                     onClick={() => setShowModal(true)}
                 >
+                    <FontAwesomeIcon icon={faPlus} className="me-2"/>
                     Cadastrar produto
                 </Button>
             </Row>
@@ -195,6 +222,20 @@ export default function Products() {
                                         required
                                         defaultValue={product.quantidade || ''}
                                     />
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group className="d-flex align-items-start flex-column">
+                                    <Form.Label>Categoria</Form.Label>
+                                    <Form.Select
+                                        multiple
+                                        name="categorias"
+                                        defaultValue={product.id_categoria}
+                                    >
+                                        {categories.map(item => (
+                                            <option key={item.id} value={item.id}>{item.descricao}</option>
+                                        ))}
+                                    </Form.Select>
                                 </Form.Group>
                             </Col>
                             <Col>
