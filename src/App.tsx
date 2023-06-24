@@ -7,6 +7,7 @@ import User from "./components/User";
 import AuthRoute from "./components/AuthRoute";
 import Products from "./components/Products";
 import Store from "./components/Store";
+import Categories from "./components/Categories";
 
 function App() {
   const router = createBrowserRouter([
@@ -39,7 +40,16 @@ function App() {
           <Store />
         </AuthRoute>
       )
+    },
+    {
+      path: '/categories',
+      element: (
+        <AuthRoute>
+          <Categories />
+        </AuthRoute>
+      )
     }
+    
   ])
   return <RouterProvider router={router} />;
 }
