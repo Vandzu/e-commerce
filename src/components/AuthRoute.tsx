@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { changeId } from '../redux/reducers/userSlice';
+import { changeId, changeAdmin } from '../redux/reducers/userSlice';
 import { Spinner, Row } from "react-bootstrap";
 import { useState } from "react";
 
-export default function AuthRoute({ children }) {
+export default function AuthRoute({ route, children }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [isSession, setIsSession] = useState<boolean>(false);
@@ -15,6 +15,10 @@ export default function AuthRoute({ children }) {
     })
         .then(res => {
             dispatch(changeId(res.data.id));
+            dispatch(changeAdmin(res.data.isAdmin == 1 ? true : false))
+            if (route === 'products' && res.data.isAdmin != 1) {
+                navigate('/store');
+            }
             setIsSession(true);
         })
         .catch(err => {
