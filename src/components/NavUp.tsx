@@ -40,7 +40,7 @@ export default function NavUp() {
           </Form.Group>
         </Nav>
         <Row className='justify-content-end'>
-          {user.admin && (
+          {user.admin ? (
             <>
               <Button
                 className='w-auto me-2'
@@ -57,7 +57,7 @@ export default function NavUp() {
               >
                 <FontAwesomeIcon icon={faListUl} />
               </Button></>
-          )}
+          ) : ''}
           <Button
             className='w-auto me-2'
             title="Loja"

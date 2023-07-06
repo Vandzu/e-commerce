@@ -157,6 +157,19 @@ input:-webkit-autofill:active{
   margin: 97px 10px !important;
 }
 
+#shopping-cart {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 10px 8px;
+  border-radius: 15px;
+}
+
+#list-cart img {
+  height: 100%;
+  max-width: 50px;
+}
+
 @media screen and (width < 995px) {
   .login .login-form {
     order: -1;

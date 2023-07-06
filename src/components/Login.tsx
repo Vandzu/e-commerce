@@ -174,11 +174,11 @@ export default function Login() {
               </Form>
               <Row
                 hidden={formType}
-                className="justify-content-center forgot-password"
+                className="justify-content-center forgot-password mb-2"
               >
                 <a>Esqueci a senha</a>
               </Row>
-              <Row className="justify-content-center">
+              <Row className="justify-content-center w-100 m-auto">
                 <Button
                   hidden={formType}
                   onClick={() => setFormType(true)}
