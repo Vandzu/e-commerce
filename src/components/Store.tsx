@@ -187,7 +187,7 @@ export default function Store() {
                     {shoppingCartList.length}
                 </Badge>
             </Button>
-            <Modal show={showModal} onHide={() => setShowModal(false)}>
+            <Modal show={showModal} onHide={() => setShowModal(false)} centered>
                 <Modal.Header closeButton>
                     Carrinho de compras
                 </Modal.Header>

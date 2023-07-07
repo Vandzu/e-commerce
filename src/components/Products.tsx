@@ -106,7 +106,7 @@ export default function Products() {
 
     const renderProducts = () => {
         return products.map(item => (
-            <Col md={4}>
+            <Col md={4} className="mb-2">
                 <Card key={item.id}>
                     <Card.Header className="img-product">
                         <img src={item.foto}></img>
@@ -184,7 +184,7 @@ export default function Products() {
             <Row className="p-2">
                 {renderProducts()}
             </Row>
-            <Modal show={showModal} size="xl" onHide={() => closeModal()}>
+            <Modal show={showModal} size="xl" onHide={() => closeModal()} centered>
                 <Modal.Header className="d-flex justify-content-start" closeButton>
                     <FontAwesomeIcon icon={faFolderPlus} className="me-2" />
                     Cadastrar produto
@@ -257,7 +257,7 @@ export default function Products() {
                     </Modal.Footer>
                 </Form>
             </Modal >
-            <Modal show={showModalDelete}>
+            <Modal show={showModalDelete} centered>
                 <Modal.Header>
                     Tem certeza que deseja excluir o produto {product.descricao} ?
                 </Modal.Header>

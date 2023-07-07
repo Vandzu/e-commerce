@@ -37,7 +37,7 @@ function App() {
     {
       path: '/store',
       element: (
-        <AuthRoute>
+        <AuthRoute route='store'>
           <Store />
         </AuthRoute>
       )
@@ -45,7 +45,7 @@ function App() {
     {
       path: '/categories',
       element: (
-        <AuthRoute>
+        <AuthRoute route='categories'>
           <Categories />
         </AuthRoute>
       )

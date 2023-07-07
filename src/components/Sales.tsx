@@ -178,7 +178,7 @@ export default function Sales() {
                     {textToast}
                 </Toast>
             </ToastContainer>
-            <Modal show={showModal}>
+            <Modal show={showModal} centered>
                 <Modal.Header>Tem certeza que deseja excluir a venda?</Modal.Header>
                 <Modal.Body className='d-flex justify-content-center'>
                     <Button

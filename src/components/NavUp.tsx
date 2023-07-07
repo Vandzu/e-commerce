@@ -58,13 +58,15 @@ export default function NavUp() {
                 <FontAwesomeIcon icon={faListUl} />
               </Button></>
           ) : ''}
-          <Button
+          {!user.admin ? (
+            <Button
             className='w-auto me-2'
             title="Loja"
             onClick={() => navigate('/store')}
           >
             <FontAwesomeIcon icon={faCartShopping} />
           </Button>
+          ) : ''}
           <Button
             variant="success"
             className='w-auto me-1'

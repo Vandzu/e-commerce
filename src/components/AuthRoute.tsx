@@ -5,7 +5,7 @@ import { changeId, changeAdmin } from '../redux/reducers/userSlice';
 import { Spinner, Row } from "react-bootstrap";
 import { useState } from "react";
 
-export default function AuthRoute({ children }) {
+export default function AuthRoute({ children, route }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [isSession, setIsSession] = useState<boolean>(false);
@@ -16,8 +16,12 @@ export default function AuthRoute({ children }) {
         .then(res => {
             dispatch(changeId(res.data.id));
             dispatch(changeAdmin(res.data.isAdmin==1 ? true : false));
+            if (res.data.isAdmin == 1 && route=='store') {
+                navigate('/products');
+            } else if (res.data.isAdmin != 1 && (route == 'products' || route == 'categories')) {
+                navigate('/store');
+            }
             setIsSession(true);
-            console.log(res.data.id);
         })
         .catch(err => {
             console.log(err);
