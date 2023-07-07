@@ -4,6 +4,7 @@ import NavUp from "./NavUp";
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faListDots, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
 
 export default function Sales() {
     const [sales, setSales] = useState<{ id: number, data_hora: string, cliente: string, endereco: string, produtos: [], preco: number }[]>([]);
@@ -13,6 +14,7 @@ export default function Sales() {
     const [toastDanger, setToastDanger] = useState<boolean>(false);
     const [showToast, setShowToast] = useState<boolean>(false);
     const [textToast, setTextToast] = useState<string>('Venda excluída com sucesso');
+    const user = useSelector(state => state.user);
 
     const getSales = () => {
         axios.get(`http://localhost:8000/api.php?route=venda`, {
@@ -23,6 +25,7 @@ export default function Sales() {
 
     useEffect(() => {
         getSales();
+
     }, []);
 
     const deleteSale = () => {
@@ -50,25 +53,27 @@ export default function Sales() {
 
     const renderProducts = () => {
         if (sale && showProducts) {
-            const productsArray = sales[sales.findIndex(item => item.id == sale)].produtos;
+          const productsArray = sales.find(item => item.id === sale)?.produtos;
+          if (productsArray) {
             return productsArray.map(item => (
-                <ListGroupItem key={item.id} id="list-cart">
-                    <Row>
-                        <Col className="d-flex align-items-center">
-                            {item.descricao} -
-                            {' R$ '}
-                            {item.preco}
-                        </Col>
-                        <Col md={5} className="d-flex align-items-center">
-                            <span className="me-2">
-                                Qtde: {item.quantidade}
-                            </span>
-                        </Col>
-                    </Row>
-                </ListGroupItem>
-            ))
+              <ListGroupItem key={item.id} id="list-cart">
+                <Row>
+                  <Col className="d-flex align-items-center">
+                    {item.descricao} - {' R$ '}
+                    {item.preco}
+                  </Col>
+                  <Col md={5} className="d-flex align-items-center">
+                    <span className="me-2">
+                      Qtde: {item.quantidade}
+                    </span>
+                  </Col>
+                </Row>
+              </ListGroupItem>
+            ));
+          }
         }
-    }
+      }
+      
 
     const viewProducts = (idSale) => {
         setSale(idSale);
@@ -94,22 +99,21 @@ export default function Sales() {
                     <td>
                         R$
                         {' '}
-                        {item.produtos.reduce((p, c) => p + (c.quantidade * c.preco), 0)}
+                        {item.produtos && item.produtos.reduce((p, c) => p + (c.quantidade * c.preco), 0)}
                     </td>
                     <td>
-                        <Button
-                            className='me-1'
-                            title='Visualizar produtos'
-                            onClick={() => viewProducts(item.id)}
-                        >
-                            <FontAwesomeIcon icon={faListDots} />
-                        </Button>
-                        <Button
-                            onClick={() => selectSaleToDelete(item.id)}
-                            variant='outline-danger'
-                        >
-                            <FontAwesomeIcon icon={faTrash} />
-                        </Button>
+                   
+    <Button className="me-1" title="Visualizar produtos" onClick={() => viewProducts(item.id)}>
+      <FontAwesomeIcon icon={faListDots} />
+    </Button>
+    {user.admin && (
+  <>
+    <Button onClick={() => selectSaleToDelete(item.id)} variant="outline-danger">
+      <FontAwesomeIcon icon={faTrash} />
+    </Button>
+  </>
+)}
+
                     </td>
                 </tr>
             ))
