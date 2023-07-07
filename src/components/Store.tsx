@@ -57,6 +57,14 @@ export default function Store() {
         }
     }
 
+    const removeProduct = (id: number) => {
+        const auxList = [...shoppingCartList];
+        const index = auxList.findIndex(item => item.id == id);
+        auxList.splice(index, 1);
+        console.log(auxList);
+        setShoppingCartList(auxList);
+    }
+
     const addItemToCart = (item: { foto: string, descricao: string, preco: number, quantidade: number, id: number }) => {
         const auxItem = JSON.parse(JSON.stringify(item));
         const auxList = [...shoppingCartList];
@@ -111,7 +119,21 @@ export default function Store() {
         ))
     }
 
+    const changeQuantity = (item: number, quantity: number) => {
+        const auxArr = [...shoppingCartList];
+        const index = auxArr.findIndex(product => product.id == item);
+        auxArr[index].quantidade = quantity;
+        setShoppingCartList(auxArr);
+    }
+
     const renderCartItens = () => {
+        if (!shoppingCartList.length) {
+            return (
+                <Row className="justify-content-center">
+                    Não há itens no carrinho
+                </Row>
+            )
+        }
         return shoppingCartList.map(item => (
             <ListGroupItem key={item.id} id="list-cart">
                 <Row>
@@ -131,8 +153,13 @@ export default function Store() {
                             max={products[products.findIndex(product => product.id == item.id)].quantidade}
                             className="me-1"
                             defaultValue={item.quantidade}
+                            onChange={e => changeQuantity(item.id, parseInt(e.target.value))}
                         />
-                        <Button variant="danger" className="text-white">
+                        <Button
+                            variant="danger"
+                            className="text-white"
+                            onClick={() => removeProduct(item.id)}
+                        >
                             <FontAwesomeIcon icon={faTrash} />
                         </Button>
                     </Col>
@@ -168,17 +195,19 @@ export default function Store() {
                     <ListGroup>
                         {renderCartItens()}
                     </ListGroup>
+                    <hr />
+                    Total:
+                    {' R$'}
+                    {shoppingCartList.length ? shoppingCartList.reduce((p, c) => p + c.preco*c.quantidade, 0) : '0'}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button
                         onClick={() => confirmBuy()}
                         className="me-2"
+                        disabled={!shoppingCartList.length}
                     >
                         <FontAwesomeIcon icon={faCheck} className="me-2" />
                         Confirmar pedido
-                    </Button>
-                    <Button variant="outline-secondary">
-                        Cancelar
                     </Button>
                 </Modal.Footer>
             </Modal>

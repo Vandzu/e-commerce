@@ -8,6 +8,7 @@ import AuthRoute from "./components/AuthRoute";
 import Products from "./components/Products";
 import Store from "./components/Store";
 import Categories from "./components/Categories";
+import Sales from "./components/Sales";
 
 function App() {
   const router = createBrowserRouter([
@@ -46,6 +47,14 @@ function App() {
       element: (
         <AuthRoute>
           <Categories />
+        </AuthRoute>
+      )
+    },
+    {
+      path: '/sales',
+      element: (
+        <AuthRoute>
+          <Sales />
         </AuthRoute>
       )
     }

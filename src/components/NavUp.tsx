@@ -1,6 +1,6 @@
 import { Container, Nav, Navbar, Form, InputGroup, Button, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faCartShopping, faArrowAltCircleRight, faLayerGroup, faListUl, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faCartShopping, faArrowAltCircleRight, faLayerGroup, faListUl, faUser, faRectangleList } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/imgs/logo.png'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -43,9 +43,9 @@ export default function NavUp() {
           {user.admin ? (
             <>
               <Button
-                className='w-auto me-2'
+                className='w-auto me-2 text-white'
                 title='Gerenciar produtos'
-                variant="outline-primary"
+                variant="danger"
                 onClick={() => navigate('/products')}
               >
                 <FontAwesomeIcon icon={faLayerGroup} />
@@ -66,11 +66,20 @@ export default function NavUp() {
             <FontAwesomeIcon icon={faCartShopping} />
           </Button>
           <Button
-            variant="outline-success"
-            className='bg-white w-auto me-1'
+            variant="success"
+            className='w-auto me-1'
+            title='Dados pessoais'
             onClick={() => navigate('/user')}
           >
             <FontAwesomeIcon icon={faUser} />
+          </Button>
+          <Button
+            variant='warning'
+            className='w-auto me-1'
+            title={`Histórico de ${user.admin ? 'vendas' : 'compras'}`}
+            onClick={() => navigate('/sales')}
+          >
+            <FontAwesomeIcon icon={faRectangleList} />
           </Button>
           <Button
             onClick={logout}
